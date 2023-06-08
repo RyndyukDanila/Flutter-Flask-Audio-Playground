@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AudioPlayerWidget extends StatefulWidget {
+  final bool deleteButton;
+
   /// Path from where to play recorded audio
   final String source;
 
@@ -16,6 +18,7 @@ class AudioPlayerWidget extends StatefulWidget {
 
   const AudioPlayerWidget({
     Key? key,
+    required this.deleteButton,
     required this.source,
     required this.onDelete,
   }) : super(key: key);
@@ -102,10 +105,8 @@ class AudioPlayerWidgetState extends State<AudioPlayerWidget> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                _buildDelete(),
-                SizedBox(
-                  width: 40,
-                ),
+                widget.deleteButton ? _buildDelete() : const SizedBox.shrink(),
+                widget.deleteButton ? SizedBox(width: 40) : const SizedBox.shrink(),
                 _buildControl(),
               ],
             ),

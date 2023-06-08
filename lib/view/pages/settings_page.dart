@@ -1,4 +1,5 @@
 import 'package:audio_playground/view/widgets/settings/language_menu_widget.dart';
+import 'package:audio_playground/view/widgets/settings/local_host_switch_widget.dart';
 import 'package:audio_playground/view/widgets/settings/theme_switch_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -24,9 +25,13 @@ class _SettingsPageState extends State<SettingsPage> {
             trailing: ThemeSwitchWidget(),
           ),
           ListTile(
-            title: Text('Text to speech language'),
-            trailing: LanguageMenuWidget(),
-          )
+            title: Text('Use local host'),
+            trailing: LocalHostSwitchWidget(),
+          ),
+          // ListTile(
+          //   title: Text('Text to speech language'),
+          //   trailing: LanguageMenuWidget(),
+          // )
         ],
       ),
     );

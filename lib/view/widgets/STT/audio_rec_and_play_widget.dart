@@ -37,9 +37,13 @@ class _AudioRecAndPlayWidgetState extends State<AudioRecAndPlayWidget> {
               ? Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: AudioPlayerWidget(
+                    deleteButton: true,
                     source: audioPath!,
                     onDelete: () {
-                      setState(() => showPlayer = false);
+                      setState(() {
+                        showPlayer = false;
+                        STTnotifier.reloadFileBools();
+                      });
                     },
                   ),
                 )

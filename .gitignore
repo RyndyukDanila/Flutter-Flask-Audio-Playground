@@ -49,3 +49,4 @@ app.*.map.json
 flask/testing/history.txt
 flask/testing/stt-file.wav
 flask/testing/tts-file.mp3
+*.wav

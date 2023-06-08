@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:audio_playground/controller/STT_notifier.dart';
 import 'package:audio_playground/view/widgets/STT/audio_rec_and_play_widget.dart';
 import 'package:audio_playground/view/widgets/STT/text_widget.dart';
@@ -19,13 +21,85 @@ class _STTPageState extends State<STTPage> {
         return Scaffold(
           appBar: AppBar(
             title: const Text("Speech To Text Page"),
+            actions: [
+              PopupMenuButton(
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    value: 'en-US',
+                    child: Text('English'),
+                  ),
+                  PopupMenuItem(
+                    value: 'ru-RU',
+                    child: Text('Russian'),
+                  ),
+                  PopupMenuItem(
+                    value: 'es-ES',
+                    child: Text('Spanish'),
+                  ),
+                  PopupMenuItem(
+                    value: 'fr-FR',
+                    child: Text('French'),
+                  ),
+                  PopupMenuItem(
+                    value: 'de-DE',
+                    child: Text('German'),
+                  ),
+                ],
+                onSelected: (value) {
+                  STTnotifier.STTlanguage = value;
+                },
+              )
+            ],
           ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: const [
-              TextWidget(),
-              Divider(),
-              AudioRecAndPlayWidget(),
+          body: ListView(
+            padding: const EdgeInsets.all(24.0),
+            children: [
+              const SizedBox(
+                height: 250,
+                child: TextWidget(),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Divider(),
+              ),
+              const SizedBox(
+                height: 200,
+                child: AudioRecAndPlayWidget(),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Divider(),
+              ),
+              STTnotifier.isWaveFileReady
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(30.0),
+                      child: STTnotifier.getWaveImageWidget(),
+                    )
+                  : STTnotifier.isImageLoading
+                      ? Container(
+                          padding: const EdgeInsets.all(4.0),
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        )
+                      : SizedBox.shrink(),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Divider(),
+              ),
+              STTnotifier.isMelFileReady
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(30.0),
+                      child: STTnotifier.getMelImageWidget(),
+                    )
+                  : STTnotifier.isImageLoading
+                      ? Container(
+                          padding: const EdgeInsets.all(4.0),
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        )
+                      : SizedBox.shrink(),
             ],
           ),
         );

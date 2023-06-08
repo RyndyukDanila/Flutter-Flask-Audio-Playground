@@ -26,7 +26,7 @@ class _MainAppState extends State<MainApp> {
       providers: [
         ChangeNotifierProvider<SettingsNotifier>(create: (_) => SettingsNotifier()),
         ChangeNotifierProvider<SpeechToTextNotifier>(create: (_) => SpeechToTextNotifier()),
-        ChangeNotifierProvider<TTSNotifier>(create: (_) => TTSNotifier()),
+        ChangeNotifierProvider<TextToSpeechNotifier>(create: (_) => TextToSpeechNotifier()),
       ],
       child: Consumer<SettingsNotifier>(
         builder: (context, SettingsNotifier settingsNotifier, child) {
@@ -41,53 +41,3 @@ class _MainAppState extends State<MainApp> {
     );
   }
 }
-
-// FutureBuilder<String>(
-//             future: service.getCustomModel(),
-//             builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-//               List<Widget> children;
-//               if (snapshot.hasData) {
-//                 children = <Widget>[
-//                   const Icon(
-//                     Icons.check_circle_outline,
-//                     color: Colors.green,
-//                     size: 60,
-//                   ),
-//                   Padding(
-//                     padding: const EdgeInsets.only(top: 16),
-//                     child: Text('Result: ${snapshot.data}'),
-//                   ),
-//                 ];
-//               } else if (snapshot.hasError) {
-//                 children = <Widget>[
-//                   const Icon(
-//                     Icons.error_outline,
-//                     color: Colors.red,
-//                     size: 60,
-//                   ),
-//                   Padding(
-//                     padding: const EdgeInsets.only(top: 16),
-//                     child: Text('Error: ${snapshot.error}'),
-//                   ),
-//                 ];
-//               } else {
-//                 children = const <Widget>[
-//                   SizedBox(
-//                     width: 60,
-//                     height: 60,
-//                     child: CircularProgressIndicator(),
-//                   ),
-//                   Padding(
-//                     padding: EdgeInsets.only(top: 16),
-//                     child: Text('Awaiting result...'),
-//                   ),
-//                 ];
-//               }
-//               return Center(
-//                 child: Column(
-//                   mainAxisAlignment: MainAxisAlignment.center,
-//                   children: children,
-//                 ),
-//               );
-//             },
-//           ),
